@@ -2,16 +2,18 @@ import wx
 import wx.adv
 
 
-class CreateNewTaskPage(wx.Panel):
+class TaskPage(wx.Panel):
     def __init__(self, parent):
         wx.Panel.__init__(self, parent)
 
-        my_sizer = wx.BoxSizer(wx.VERTICAL)
+        # define sizers to be used
+        task_main_sizer = wx.BoxSizer(wx.VERTICAL)
+        add_task_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
         # date picker
         self.date_picker = wx.adv.DatePickerCtrl(self,
                                                 style=wx.adv.DP_DROPDOWN)
-        my_sizer.Add(self.date_picker, 0, wx.ALL | wx.CENTER, 5)
+        add_task_sizer.Add(self.date_picker, 0, wx.ALL, 5)
 
         # text box
         self.text_ctrl = wx.TextCtrl(self, value="Task Name", size=(250,30),
@@ -20,15 +22,18 @@ class CreateNewTaskPage(wx.Panel):
         self.text_ctrl.Bind(wx.EVT_SET_FOCUS, self.on_focus)
         self.text_ctrl.Bind(wx.EVT_KILL_FOCUS, self.on_focus_lost)
         self.text_ctrl.Bind(wx.EVT_TEXT_ENTER, self.on_press)
-        my_sizer.Add(self.text_ctrl, 0, wx.ALL | wx.CENTER, 5)
+        add_task_sizer.Add(self.text_ctrl, 0, wx.ALL, 5)
         
         # button
         btn = wx.Button(self, label='Create Task')
         btn.Bind(wx.EVT_BUTTON, self.on_press)
-        my_sizer.Add(btn, 0, wx.ALL | wx.CENTER, 5)
+        add_task_sizer.Add(btn, 0, wx.ALL, 5)
         
-        self.SetSizer(my_sizer)
-        #self.Show()
+        # add horizontal add task sizer to main sizer
+        task_main_sizer.Add(add_task_sizer, wx.ALIGN_CENTER_HORIZONTAL)
+        
+        # set the panel sizer
+        self.SetSizer(task_main_sizer)
 
     def on_focus(self, event):
         if self.text_ctrl.GetValue() == self.text_ctrl.GetName():
@@ -59,15 +64,13 @@ class MainFrame(wx.Frame):
         self.notebook = wx.Notebook(panel)
 
         # create page windows as notebook children
-        #TODO task_page = TaskPage(self.notebook)
-        create_new_task_page = CreateNewTaskPage(self.notebook)
+        task_page = TaskPage(self.notebook)
         #TODO timer_page = TimerPage(self.notebook)
         #TODO habit_page = HabitPage(self.notebook)
         #TODO statistics_page = StatisticsPage(self.notebook)
 
         # add pages to the notebook with labels
-        #TODO self.notebook.AddPage(task_page, "Tasks")
-        self.notebook.AddPage(create_new_task_page, "New Task")
+        self.notebook.AddPage(task_page, "Tasks")
         #TODO self.notebook.AddPage(timer_page, "Timer")
         #TODO self.notebook.AddPage(habit_page, "Habits")
         #TODO self.notebook.AddPage(statistcs_page, "Stats")
