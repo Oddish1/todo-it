@@ -22,3 +22,5 @@ an alert when it's time to take a break (user configurable).
 "work", "chores", etc.
 - **Statistics**: A report page that shows you total time spent on tasks as
 well as total time per task tag.
+- **Habit Tracker**: A page where you can create habits and check them off
+daily. It will look similar to github commit history graph for each habit.
