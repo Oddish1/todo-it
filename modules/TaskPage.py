@@ -42,7 +42,10 @@ class TaskPage(wx.Panel):
     # display the row data
     for line in items:
       display_date = datetime.fromisoformat(line[0]).strftime('%a, %b %d %Y')
-      self.task_display_list.Append((display_date,line[1],line[2],line[3]))
+      line[3].sort()
+      display_tags = ', '.join(line[3])
+      # TODO check if overdue, if it is display in red otherwise display normally
+      self.task_display_list.Append((display_date,line[1],line[2],display_tags))
     self.update_table()
     # add table to the main sizer
     task_main_sizer.Add(self.task_display_list, 1, wx.EXPAND | wx.ALL, 5)
@@ -76,7 +79,9 @@ class TaskPage(wx.Panel):
       self.task_display_list.DeleteAllItems()
       for line in items:
         display_date = datetime.fromisoformat(line[0]).strftime('%a, %b %d %Y')
-        self.task_display_list.Append((display_date,line[1],line[2],line[3]))
+        line[3].sort()
+        display_tags = ', '.join(line[3])
+        self.task_display_list.Append((display_date,line[1],line[2],display_tags))
       self.update_table()
 
 
