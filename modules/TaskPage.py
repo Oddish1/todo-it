@@ -35,8 +35,14 @@ class TaskPage(wx.Panel):
     # task list
     self.col_names = ['Date', 'Task', 'Done', 'Tags']
     self.task_display_list = wx.ListCtrl(self, style=wx.LC_REPORT)
+    #self.task_display_list.EnableCheckBoxes()
     for i in range(4):
-        self.task_display_list.InsertColumn(i, self.col_names[i])
+      self.task_display_list.InsertColumn(i, self.col_names[i])
+    for line in items:
+      self.task_display_list.Append((line[0],line[1],line[2],line[3]))
+    for i in range(0, len(self.col_names)):
+      self.task_display_list.SetColumnWidth(i, wx.LIST_AUTOSIZE_USEHEADER)
+    self.task_display_list.GetParent().Layout()
     task_main_sizer.Add(self.task_display_list, 1, wx.EXPAND | wx.ALL, 5)
 
     # set the panel sizer
@@ -59,5 +65,11 @@ class TaskPage(wx.Panel):
     if (value and date):
       # automatically sets priority to order items are added in and sets
       # done-state boolean to False
-      items.append([date, value.strip(), len(items), False])
+      items.append([date, value.strip(), False, ['ToDo'], len(items) + 1])
       print(f'Items: {items}')
+      self.task_display_list.DeleteAllItems()
+      for line in items:
+        self.task_display_list.Append((line[0],line[1],line[2],line[3]))
+      for i in range(0, len(self.col_names)):
+        self.task_display_list.SetColumnWidth(i, wx.LIST_AUTOSIZE_USEHEADER)
+      self.task_display_list.GetParent().Layout()
