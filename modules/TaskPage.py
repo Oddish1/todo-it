@@ -1,5 +1,6 @@
 import wx
 import wx.adv
+from main import items
 
 class TaskPage(wx.Panel):
     def __init__(self, parent):
@@ -29,8 +30,15 @@ class TaskPage(wx.Panel):
         add_task_sizer.Add(btn, 0, wx.ALL, 5)
         
         # add horizontal add task sizer to main sizer
-        task_main_sizer.Add(add_task_sizer, wx.ALIGN_CENTER_HORIZONTAL)
-        
+        task_main_sizer.Add(add_task_sizer, 0, wx.ALIGN_CENTER_HORIZONTAL, 5)
+
+        # task list
+        self.col_names = ['Date', 'Task', 'Done', 'Tags']
+        self.task_display_list = wx.ListCtrl(self, style=wx.LC_REPORT)
+        for i in range(4):
+            self.task_display_list.InsertColumn(i, self.col_names[i])
+        task_main_sizer.Add(self.task_display_list, 1, wx.EXPAND | wx.ALL, 5)
+
         # set the panel sizer
         self.SetSizer(task_main_sizer)
 
