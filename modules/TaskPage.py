@@ -10,12 +10,12 @@ class TaskPage(wx.Panel):
     task_main_sizer = wx.BoxSizer(wx.VERTICAL)
     add_task_sizer = wx.BoxSizer(wx.HORIZONTAL)
 
-    # date picker
+# DATE PICKER
     self.date_picker = wx.adv.DatePickerCtrl(self,
                                             style=wx.adv.DP_DROPDOWN)
     add_task_sizer.Add(self.date_picker, 0, wx.ALL, 5)
 
-    # text box
+# NEW TASK TEXT BOX
     self.text_ctrl = wx.TextCtrl(self, value="Task Name", size=(250,30),
                                 style=wx.TE_PROCESS_ENTER, name="Task Name")
     self.text_ctrl.SetForegroundColour(wx.LIGHT_GREY)
@@ -24,7 +24,7 @@ class TaskPage(wx.Panel):
     self.text_ctrl.Bind(wx.EVT_TEXT_ENTER, self.on_press)
     add_task_sizer.Add(self.text_ctrl, 0, wx.ALL, 5)
     
-    # button
+# CREATE TASK BUTTON
     btn = wx.Button(self, label='Create Task')
     btn.Bind(wx.EVT_BUTTON, self.on_press)
     add_task_sizer.Add(btn, 0, wx.ALL, 5)
@@ -32,32 +32,38 @@ class TaskPage(wx.Panel):
     # add horizontal add task sizer to main sizer
     task_main_sizer.Add(add_task_sizer, 0, wx.ALIGN_CENTER_HORIZONTAL, 5)
 
-    # task list
+# TASK LIST
     self.col_names = ['Date', 'Task', 'Done', 'Tags']
     self.task_display_list = wx.ListCtrl(self, style=wx.LC_REPORT)
-    #self.task_display_list.EnableCheckBoxes()
+    # display the column headers
     for i in range(4):
       self.task_display_list.InsertColumn(i, self.col_names[i])
+    # display the row data
     for line in items:
       self.task_display_list.Append((line[0],line[1],line[2],line[3]))
+    # resize table to show all content
     for i in range(0, len(self.col_names)):
       self.task_display_list.SetColumnWidth(i, wx.LIST_AUTOSIZE_USEHEADER)
     self.task_display_list.GetParent().Layout()
+    # add table to the main sizer
     task_main_sizer.Add(self.task_display_list, 1, wx.EXPAND | wx.ALL, 5)
 
     # set the panel sizer
     self.SetSizer(task_main_sizer)
 
+  # clear the default text when text box is in focus
   def on_focus(self, event):
     if self.text_ctrl.GetValue() == self.text_ctrl.GetName():
       self.text_ctrl.Clear()
       self.text_ctrl.SetForegroundColour(wx.BLACK)
 
+  # add the default text wen the text box is out of focus
   def on_focus_lost(self, event):
     if self.text_ctrl.GetValue() == "":
       self.text_ctrl.SetValue(self.text_ctrl.GetName())
       self.text_ctrl.SetForegroundColour(wx.LIGHT_GREY)
 
+  # clear text box, add new task to task list and display it in the table
   def on_press(self, event):
     value = self.text_ctrl.GetValue()
     date = self.date_picker.GetValue()
