@@ -1,6 +1,7 @@
 import wx
 import wx.adv
 from main import items
+from datetime import date, datetime
 
 class TaskPage(wx.Panel):
   def __init__(self, parent):
@@ -40,11 +41,9 @@ class TaskPage(wx.Panel):
       self.task_display_list.InsertColumn(i, self.col_names[i])
     # display the row data
     for line in items:
-      self.task_display_list.Append((line[0],line[1],line[2],line[3]))
-    # resize table to show all content
-    for i in range(0, len(self.col_names)):
-      self.task_display_list.SetColumnWidth(i, wx.LIST_AUTOSIZE_USEHEADER)
-    self.task_display_list.GetParent().Layout()
+      display_date = datetime.fromisoformat(line[0]).strftime('%a, %b %d %Y')
+      self.task_display_list.Append((display_date,line[1],line[2],line[3]))
+    self.update_table()
     # add table to the main sizer
     task_main_sizer.Add(self.task_display_list, 1, wx.EXPAND | wx.ALL, 5)
 
@@ -66,16 +65,22 @@ class TaskPage(wx.Panel):
   # clear text box, add new task to task list and display it in the table
   def on_press(self, event):
     value = self.text_ctrl.GetValue()
-    date = self.date_picker.GetValue()
+    # convert wx.DateTime to Python datetime object
+    date_val = self.date_picker.GetValue().Format('%Y%m%d')
     self.text_ctrl.SetValue("")
-    if (value and date):
+    if (value and date_val):
       # automatically sets priority to order items are added in and sets
       # done-state boolean to False
-      items.append([date, value.strip(), False, ['ToDo'], len(items) + 1])
+      items.append([date_val, value.strip(), False, ['ToDo'], len(items) + 1])
       print(f'Items: {items}')
       self.task_display_list.DeleteAllItems()
       for line in items:
-        self.task_display_list.Append((line[0],line[1],line[2],line[3]))
-      for i in range(0, len(self.col_names)):
-        self.task_display_list.SetColumnWidth(i, wx.LIST_AUTOSIZE_USEHEADER)
-      self.task_display_list.GetParent().Layout()
+        display_date = datetime.fromisoformat(line[0]).strftime('%a, %b %d %Y')
+        self.task_display_list.Append((display_date,line[1],line[2],line[3]))
+      self.update_table()
+
+
+  def update_table(self):
+    for i in range(0, len(self.col_names)):
+      self.task_display_list.SetColumnWidth(i, wx.LIST_AUTOSIZE_USEHEADER)
+    self.task_display_list.GetParent().Layout()
