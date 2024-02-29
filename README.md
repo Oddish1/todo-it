@@ -11,13 +11,9 @@ day's tasks.
 changing task date, changing task priority manually.
 - **Task Time Estimation**: The ability to input a time estimation along with
 how long the task actually took to complete.
-- **Time Estimation Recommendations**: Functionality in the application that
-can look at similar tasks you have completed in the past and give a better time
-estimation. Will be able to be overridden by the user.
 - **Timer**: A task timer that you can start when starting a task, pause, and
-stop when you are completed with the task. Will work hand in hand with time
-estimation recommendations. Will be able to be configured to automatically send
-an alert when it's time to take a break (user configurable).
+stop when you are completed with the task. Will be able to be configured to
+automatically send an alert when it's time to take a break (user configurable).
 - **Task Tagging**: The ability to add tags to your tasks such as "school",
 "work", "chores", etc.
 - **Statistics**: A report page that shows you total time spent on tasks as
