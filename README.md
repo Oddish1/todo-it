@@ -1,6 +1,6 @@
 # todo-it
 
-todo-it will be a basic ToDo application written in Python. Some features that
+ToDo It is a basic todo application written in Python using Flask. Some features that
 I look forward to adding include:
 
 - **Task Priority**: The ability to drag-and-drop tasks within your ToDo list
@@ -9,14 +9,11 @@ to change task priority. Saves priority state.
 day's tasks.
 - **Task Editing**: The ability to edit a task including adding descriptions,
 changing task date, changing task priority manually.
-- **Task Time Estimation**: The ability to input a time estimation along with
-how long the task actually took to complete.
-- **Timer**: A task timer that you can start when starting a task, pause, and
-stop when you are completed with the task. Will be able to be configured to
-automatically send an alert when it's time to take a break (user configurable).
 - **Task Tagging**: The ability to add tags to your tasks such as "school",
 "work", "chores", etc.
-- **Statistics**: A report page that shows you total time spent on tasks as
-well as total time per task tag.
 - **Habit Tracker**: A page where you can create habits and check them off
 daily. It will look similar to github commit history graph for each habit.
+- **Timer**: A task timer that you can start when starting a task, pause, and
+stop when you are completed with the task.
+- **Statistics**: A report page that shows you total time spent on tasks as
+well as total time per task tag.
