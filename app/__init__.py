@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template
 import os
+from . import db
 
 
 def create_app(test_config=None):
@@ -22,6 +23,8 @@ def create_app(test_config=None):
     os.makedirs(app.instance_path)
   except OSError:
     pass
+
+  db.init_app(app)
 
   """@app.route('/')
   def index():
