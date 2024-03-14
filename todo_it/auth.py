@@ -37,7 +37,7 @@ def register():
 
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
-  if request.mehtod == 'POST':
+  if request.method == 'POST':
     username = request.form['username']
     password = request.form['password']
     db = get_db()
@@ -52,7 +52,7 @@ def login():
     
     if error is None:
       session.clear()
-      session['user_id'] = users['user_id']
+      session['user_id'] = user['user_id']
       return redirect(url_for('index'))
     
     flash(error)
