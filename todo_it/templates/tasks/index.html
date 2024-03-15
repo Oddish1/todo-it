@@ -2,10 +2,14 @@
 
 
 {% block header %}
-<h2>{% block title %}Current Tasks{% endblock %}</h2>
-{% if g.user %}
-<a class="action new_task" href="{{ url_for('tasks.new') }}">New Task</a>
-{% endif %}
+<div class="current-tasks-and-button">
+    <h2>{% block title %}Current Tasks{% endblock %}</h2>
+    {% if g.user %}
+    <form action="{{ url_for('tasks.new') }}">
+        <input class="new-task-button" type="submit" value="New">
+    </form>
+    {% endif %}
+</div>
 {% endblock %}
 
 {% block content %}
@@ -21,7 +25,9 @@
     <hr>
     <p class="description">{{ task['task_description'] }}</p>
     <div>
-        <a class="action" href="{{ url_for('tasks.update', task_id=task['task_id']) }}">Edit</a>
+        <form action="{{ url_for('tasks.update', task_id=task['task_id']) }}">
+            <input class="edit-button" type="submit" value="Edit">
+        </form>
     </div>
 </article>
 {% endif %}
