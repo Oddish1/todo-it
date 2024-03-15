@@ -18,9 +18,9 @@ bp = Blueprint('tasks', __name__)
 def index():
     db = get_db()
     tasks = db.execute(
-        'SELECT t.task_id, owner_id, created, task_name, task_description, task_complete'
+        'SELECT t.task_id, owner_id, created, task_name, task_description, task_complete, due_date, task_priority'
         ' FROM tasks t JOIN users u ON t.owner_id = u.user_id'
-        #' ORDER BY created DESC'
+        ' ORDER BY task_priority ASC'
     ).fetchall()
     return render_template('tasks/index.html', tasks=tasks)
 
@@ -31,6 +31,8 @@ def new():
     if request.method == 'POST':
         task_name = request.form['task_name']
         task_description = request.form['task_description']
+        task_priority = request.form['task_priority']
+        due_date = request.form['due_date']
         error = None
 
         if not task_name:
@@ -40,9 +42,9 @@ def new():
         else:
             db = get_db()
             db.execute(
-                'INSERT INTO tasks (task_name, task_description, owner_id)'
-                ' VALUES (?, ?, ?)',
-                (task_name, task_description, g.user['user_id'])
+                'INSERT INTO tasks (task_name, task_description, task_priority, due_date, owner_id)'
+                ' VALUES (?, ?, ?, ?, ?)',
+                (task_name, task_description, task_priority, due_date, g.user['user_id'])
             )
             db.commit()
             return redirect(url_for('tasks.index'))

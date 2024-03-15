@@ -4,7 +4,7 @@
 {% block header %}
 <h2>{% block title %}Current Tasks{% endblock %}</h2>
 {% if g.user %}
-<a class="action" href="{{ url_for('tasks.new') }}">New Task</a>
+<a class="action new_task" href="{{ url_for('tasks.new') }}">New Task</a>
 {% endif %}
 {% endblock %}
 
@@ -13,10 +13,12 @@
 {% if not task['task_complete'] %}
 <article class="task">
     <header>
-        <div>
+        <div class="task-header">
             <h3>{{ task['task_name'] }}</h3>
+            <h4>{{ task['due_date'] }}</h4>
         </div>
     </header>
+    <hr>
     <p class="description">{{ task['task_description'] }}</p>
     <div>
         <a class="action" href="{{ url_for('tasks.update', task_id=task['task_id']) }}">Edit</a>

@@ -6,9 +6,19 @@
 
 {% block content %}
 <form method="post">
-    <label for="task_name">Name</label>
-    <input name="task_name" id="task_name" value="{{ request.form['task_name'] }}" requried>
-    <label for="task_description">Description</label>
+    <div>
+        <label for="task_name">Name:</label>
+        <input name="task_name" id="task_name" value="{{ request.form['task_name'] }}" requried>
+    </div>
+    <div>
+        <label for="task_priority">Priority:</label>
+        <input type="number" name="task_priority" id="task_priority" value="{{ request.form[task_priority] }}">
+    </div>
+    <div>
+        <label for="due_date">Due:</label>
+        <input type="date" name="due_date" id="due_date" value="{{ request.form[due_date] }}">
+    </div>
+    <label for="task_description">Description:</label>
     <textarea name="task_description" id="task_description">{{ request.form['task_description'] }}</textarea>
     <input type="submit" value="Save">
 </form>

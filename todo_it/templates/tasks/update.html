@@ -6,15 +6,29 @@
 
 {% block content %}
 <form method="post">
-    <label for="task_name">Task Name</label>
-    <input name="task_name" id="task_name" value="{{ request.form['task_name'] or task['task_name'] }}" requried>
-    <label for="task_description">Description</label>
+    <div>
+        <label for="task_name">Name:</label>
+        <input name="task_name" id="task_name" value="{{ request.form['task_name'] or task['task_name'] }}" requried>
+    </div>
+    <div>
+        <label for="task_priority">Priority:</label>
+        <input type="number" name="task_priority" id="task_priority" value="{{ request.form[task_priority] }}">
+    </div>
+    <div>
+        <label for="due_date">Due:</label>
+        <input type="date" name="due_date" id="due_date" value="{{ request.form[due_date] }}">
+    </div>
+    <label for="task_description">Description:</label>
     <textarea name="task_description"
         id="task_description">{{ request.form['task_description'] or task['task_description'] }}</textarea>
-    <input type="submit" value="Save">
-</form>
-<hr>
-<form action="{{ url_for('tasks.delete', task_id=task['task_id']) }}" method="post">
-    <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+    <div class="button-container">
+        <input type="submit" value="Save">
+        <form action="{{ (url_for('tasks.index')) }}">
+            <input type="submit" value="Cancel">
+        </form>
+        <form action="{{ url_for('tasks.delete', task_id=task['task_id']) }}" method="post">
+            <input class="danger" type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+        </form>
+    </div>
 </form>
 {% endblock %}
