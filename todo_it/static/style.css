@@ -1,134 +1,245 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap');
+
+.nanum-myeongjo-regular {
+    font-family: "Nanum Myeongjo", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.nanum-myeongjo-bold {
+    font-family: "Nanum Myeongjo", serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.rammetto-one-regular {
+    font-family: "Rammetto One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+colors {
+    color: #ECA400 #999799 #DCF9F0 #691612 #001D4A #ffffff
+}
+
+
 html {
-  font-family: sans-serif;
-  background: #eee;
-  padding: 1rem;
+    font-family: "Nanum Myeongjo", serif;
+    background: #f3f8ff;
+    padding: 1rem;
 }
 
 body {
-  max-width: 960px;
-  margin: 0 auto;
-  background: white;
+    min-width: 400px;
+    max-width: 500px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 25px;
+    border: 2px solid #ECA400;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: serif;
-  color: #3f974f;
-  margin: 1rem 0;
+h1 {
+    font-family: "Rammetto One", sans-serif;
+    color: #691612;
+    margin: 1rem 0;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Nanum Myeongjo", serif;
+    color: #691612;
+    margin: 1rem 0;
 }
 
 a {
-  color: #3f974f;
+    color: #001D4A;
+}
+
+a:hover {
+    color: #691612
 }
 
 hr {
-  border: none;
-  border-top: 1px solid lightgray;
+    border: none;
+    border-top: 1px solid #D5C7BC;
 }
 
 nav {
-  background: lightgray;
-  display: flex;
-  align-items: center;
-  padding: 0 0.5rem;
+    background: #ffffff;
+    border-radius: 10px;
+    border: 2px solid #691612;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
 }
 
 nav h1 {
-  flex: auto;
-  margin: 0;
+    flex: auto;
+    margin: 0;
 }
 
 nav h1 a {
-  text-decoration: none;
-  padding: 0.25rem 0.5rem;
+    text-decoration: none;
+    padding: 0.25rem 0.5rem;
 }
 
-nav ul  {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-nav ul li a, nav ul li span, header .action {
-  display: block;
-  padding: 0.5rem;
+nav ul li a,
+nav ul li span,
+header .action {
+    display: block;
+    padding: 0.5rem;
+}
+
+span.username-display {
+    font-weight: 700;
 }
 
 .content {
-  padding: 0 1rem 1rem;
+    padding: 0 1rem 1rem;
 }
 
-.content > header {
-  border-bottom: 1px solid lightgray;
-  display: flex;
-  align-items: flex-end;
-}
-
-.content > header h1 {
-  flex: auto;
-  margin: 1rem 0 0.25rem 0;
+.content>header h1 {
+    flex: auto;
+    margin: 1rem 0 0.25rem 0;
 }
 
 .flash {
-  margin: 1em 0;
-  padding: 1em;
-  background: #cae6f6;
-  border: 1px solid #3f974f;
+    margin: 1em 0;
+    padding: 1em;
+    background: #FCEEEE;
+    border: 2px solid #691612;
+    border-radius: 5px;
 }
 
-.post > header {
-  display: flex;
-  align-items: flex-end;
-  font-size: 0.85em;
+.post>header {
+    display: flex;
+    align-items: flex-end;
+    font-size: 0.85em;
 }
 
-.post > header > div:first-of-type {
-  flex: auto;
+.post>header>div:first-of-type {
+    flex: auto;
 }
 
-.post > header h1 {
-  font-size: 1.5em;
-  margin-bottom: 0;
+.post>header h1 {
+    font-size: 1.5em;
+    margin-bottom: 0;
 }
 
 .post .about {
-  color: slategray;
-  font-style: italic;
+    color: slategray;
+    font-style: italic;
 }
 
 .post .body {
-  white-space: pre-line;
+    white-space: pre-line;
 }
 
 .content:last-child {
-  margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .content form {
-  margin: 1em 0;
-  display: flex;
-  flex-direction: column;
+    margin: 1em 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .content label {
-  font-weight: bold;
-  margin-bottom: 0.5em;
+    font-weight: normal;
+    margin-bottom: 0.5em;
 }
 
-.content input, .content textarea {
-  margin-bottom: 1em;
+.content input,
+.content textarea {
+    margin-bottom: 1em;
 }
 
 .content textarea {
-  min-height: 12em;
-  resize: vertical;
+    min-height: 12em;
+    resize: vertical;
 }
 
 input.danger {
-  color: #cc2f2e;
+    color: #cc2f2e;
+}
+
+@keyframes button-off-hover {
+    from {
+        background-color: #691612;
+        border-radius: 16px;
+    }
+
+    to {
+        background-color: #001D4A;
+        border-radius: 10px;
+    }
 }
 
 input[type=submit] {
-  align-self: start;
-  min-width: 10em;
+    background-color: #001D4A;
+    color: #EFF7FB;
+    border: none;
+    padding: 12px 12px;
+    margin: 4px 2px;
+    text-decoration: none;
+    align-self: start;
+    min-width: 10em;
+    cursor: pointer;
+    border-radius: 10px;
+    animation: button-off-hover 0.1s linear 0s normal;
+}
+
+@keyframes button-on-hover {
+    from {
+        background-color: #001D4A;
+        border-radius: 10px;
+    }
+
+    to {
+        background-color: #691612;
+        border-radius: 16px;
+    }
+}
+
+input[type=submit]:hover {
+    background-color: #691612;
+    border-radius: 16px;
+    animation: button-on-hover 0.1s linear 0s normal;
+}
+
+input[name="username"] {
+    border: 2px solid #001D4A;
+    border-radius: 5px;
+    padding: 8px 16px;
+}
+
+input[name="username"]:focus {
+    background-color: #f3f8ff;
+}
+
+input[name="password"] {
+    border: 2px solid #001D4A;
+    border-radius: 5px;
+    padding: 8px 16px;
+}
+
+input[name="password"]:focus {
+    background-color: #f3f8ff;
 }
