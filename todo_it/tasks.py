@@ -15,13 +15,20 @@ from todo_it.db import get_db
 bp = Blueprint('tasks', __name__)
 
 @bp.route('/')
+@login_required
 def index():
-    db = get_db()
-    tasks = db.execute(
-        'SELECT t.task_id, owner_id, created, task_name, task_description, task_complete, due_date, task_priority'
-        ' FROM tasks t JOIN users u ON t.owner_id = u.user_id'
-        ' ORDER BY task_priority ASC'
-    ).fetchall()
+    user_id = g.user['user_id']
+    error = None
+    if not user_id:
+        error = 'User is not logged in!'
+    if error is not None:
+        flash(error)
+    else:
+        tasks = get_db().execute(
+            'SELECT * FROM tasks JOIN users ON tasks.owner_id = users.user_id'
+            ' ORDER BY tasks.due_date DESC'
+        ).fetchall()
+        tasks = [x for x in tasks if x['user_id'] == user_id]
     return render_template('tasks/index.html', tasks=tasks)
 
 
