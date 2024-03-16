@@ -38,7 +38,23 @@ def register():
             except db.IntegrityError:
                 error = f"User {username} is already registered."
             else:
-                return redirect(url_for("auth.login"))
+                user = db.execute(
+                    "SELECT * FROM users WHERE username = ?", (username,)
+                ).fetchone()
+
+                if user is None:
+                    error = "Error logging user in, couldn't fetch user.\nPlease try logging in manually."
+                elif not check_password_hash(user["password"], password):
+                    error = "Error logging user in, couldn't verify password.\nPlease try logging in manually."
+
+                if error is None:
+                    session.clear()
+                    session["user_id"] = user["user_id"]
+                    return redirect(url_for("index"))
+
+                flash(error)
+
+                return redirect(url_for("auth/login.html"))
 
         flash(error)
 
